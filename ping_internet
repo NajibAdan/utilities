@@ -1,0 +1,10 @@
+#!/bin/bash
+# A small utility that checks if my internet is working
+
+nc -w 5 -z 8.8.8.8 53  >/dev/null 2>&1
+online=$?
+if [ $online -eq 0 ]; then
+    echo "Online"
+else
+    notify-send "No Internet Connection" "Replug the adapter" --icon=network-error 
+fi

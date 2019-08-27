@@ -1,0 +1,43 @@
+#!/usr/bin/env python
+# looks up words on jisho
+
+import json
+import urllib2
+import sys
+BASE_URL = "https://jisho.org/api/v1/search/words?keyword="
+
+def cobbler(definitions):
+    empty_list = []
+    for defe in definitions:
+        empty_list.append(defe)
+    print(', '.join(empty_list)) 
+
+if len(sys.argv) == 1:
+    print "Correct usage: jisho word_to_search"
+    sys.exit(0)
+else:
+    data = json.load(urllib2.urlopen(BASE_URL+urllib2.quote(sys.argv[1])))
+
+if not data['data']:
+    print 'Nothing Found'
+    sys.exit(0)
+for response in data['data']:
+    test = response['japanese'][0]
+    if 'word' in test:
+        print test['word'] + "[" + test.get('reading',"") + "]"
+    else:
+        print test['reading']
+    if (len(response['japanese'])>1):
+        print "Other Forms"
+        for word in response['japanese'][1:]:
+            if 'word' in word:
+                print word['word'] + "[" + word.get('reading',"") + "]"
+            else:
+                print word['reading']
+    print "Definitions"
+    for idx,meaning in enumerate(response['senses']):
+        print str(idx+1) + ". ",
+        cobbler(meaning['english_definitions'])
+    print "=" * 80
+    print
+#pprint(data['data'])
