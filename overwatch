@@ -1,13 +1,13 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Checks what games are available on the Overwatch Arcade
 
 import json
-import urllib2
+import urllib.request
 from pprint import pprint
 URL = "https://overwatcharcade.today/api/today"
 hdr = {'User-Agent':'Mozilla/5.0'}
-req = urllib2.Request(URL,headers=hdr)
-data = json.load(urllib2.urlopen(req))
+req = urllib.request.Request(URL,headers=hdr)
+data = json.load(urllib.request.urlopen(req))
 print("Today's Arcade\n***********************************************\nDaily\n"
     "Game : " + data["tile_large"]["name"] + "\nPlayers: " + data["tile_large"]["players"] +
     "\n===============================================\n"
