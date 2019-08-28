@@ -8,14 +8,14 @@ URL = "https://overwatcharcade.today/api/today"
 hdr = {'User-Agent':'Mozilla/5.0'}
 req = urllib2.Request(URL,headers=hdr)
 data = json.load(urllib2.urlopen(req))
-print "Today's Arcade\n***********************************************\nDaily"
-print "Game : " + data["tile_large"]["name"] + "\nPlayers: " + data["tile_large"]["players"]
-print "==============================================="
-print "Game: "+data["tile_daily"]["name"] + "\nPlayers : " + data["tile_daily"]["players"]
-print "***********************************************\n***********************************************\nWeekly"
-print "Game : " + data["tile_weekly_1"]["name"] + "\nPlayers: " + data["tile_weekly_1"]["players"]
-print "==============================================="
-print "Game : " + data["tile_weekly_2"]["name"] + "\nPlayers: " + data["tile_weekly_2"]["players"]
-print "***********************************************\n***********************************************\nPermanent"
-print "Game: " + data["tile_permanent"]["name"] + "\nPlayers: " + data["tile_permanent"]["players"]
-print "***********************************************"
+print("Today's Arcade\n***********************************************\nDaily\n"
+    "Game : " + data["tile_large"]["name"] + "\nPlayers: " + data["tile_large"]["players"] +
+    "\n===============================================\n"
+    "Game : " + data["tile_daily"]["name"] + "\nPlayers : " + data["tile_daily"]["players"] +
+    "\n***********************************************\n\n***********************************************\nWeekly\n"
+    "Game : " + data["tile_weekly_1"]["name"] + "\nPlayers: " + data["tile_weekly_1"]["players"] +
+    "\n===============================================\n"
+    "Game : " + data["tile_weekly_2"]["name"] + "\nPlayers: " + data["tile_weekly_2"]["players"] + 
+    "\n***********************************************\n\n***********************************************\nPermanent\n"
+    "Game : " + data["tile_permanent"]["name"] + "\nPlayers: " + data["tile_permanent"]["players"] +
+    "\n***********************************************")
