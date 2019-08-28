@@ -8,25 +8,14 @@ URL = "https://overwatcharcade.today/api/today"
 hdr = {'User-Agent':'Mozilla/5.0'}
 req = urllib2.Request(URL,headers=hdr)
 data = json.load(urllib2.urlopen(req))
-print "Today's Arcade\n"
-print "***********************************************"
-print "Daily"
-print "Game : " + data["tile_large"]["name"]
-print "Players: " + data["tile_large"]["players"]
+print "Today's Arcade\n***********************************************\nDaily"
+print "Game : " + data["tile_large"]["name"] + "\nPlayers: " + data["tile_large"]["players"]
 print "==============================================="
-print "Game: "+data["tile_daily"]["name"]
-print "Players : " + data["tile_daily"]["players"]
-print "***********************************************\n"
-print "***********************************************"
-print "Weekly"
-print "Game : " + data["tile_weekly_1"]["name"]
-print "Players: " + data["tile_weekly_1"]["players"]
+print "Game: "+data["tile_daily"]["name"] + "\nPlayers : " + data["tile_daily"]["players"]
+print "***********************************************\n***********************************************\nWeekly"
+print "Game : " + data["tile_weekly_1"]["name"] + "\nPlayers: " + data["tile_weekly_1"]["players"]
 print "==============================================="
-print "Game : " + data["tile_weekly_2"]["name"]
-print "Players: " + data["tile_weekly_2"]["players"]
-print "***********************************************\n"
-print "***********************************************"
-print "Permanent"
-print "Game: " + data["tile_permanent"]["name"]
-print "Players: " + data["tile_permanent"]["players"]
+print "Game : " + data["tile_weekly_2"]["name"] + "\nPlayers: " + data["tile_weekly_2"]["players"]
+print "***********************************************\n***********************************************\nPermanent"
+print "Game: " + data["tile_permanent"]["name"] + "\nPlayers: " + data["tile_permanent"]["players"]
 print "***********************************************"
