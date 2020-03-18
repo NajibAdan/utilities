@@ -1,8 +1,6 @@
-#!/usr/bin/env python
-# looks up words on jisho
-
+#!/usr/bin/env python3
 import json
-import urllib2
+import urllib.request
 import sys
 BASE_URL = "https://jisho.org/api/v1/search/words?keyword="
 
@@ -13,31 +11,31 @@ def cobbler(definitions):
     print(', '.join(empty_list)) 
 
 if len(sys.argv) == 1:
-    print "Correct usage: jisho word_to_search"
+    print("Correct usage: jisho word_to_search")
     sys.exit(0)
 else:
-    data = json.load(urllib2.urlopen(BASE_URL+urllib2.quote(sys.argv[1])))
+    resp = urllib.request.Request(BASE_URL+urllib.request.quote(sys.argv[1]))
+    data = json.load(urllib.request.urlopen(BASE_URL+urllib.request.quote(sys.argv[1])))
 
 if not data['data']:
-    print 'Nothing Found'
+    print('Nothing Found')
     sys.exit(0)
 for response in data['data']:
     test = response['japanese'][0]
     if 'word' in test:
-        print test['word'] + "[" + test.get('reading',"") + "]"
+        print(test['word'] + "[" + test.get('reading',"") + "]")
     else:
-        print test['reading']
+        print(test['reading'])
     if (len(response['japanese'])>1):
-        print "Other Forms"
+        print("Other Forms")
         for word in response['japanese'][1:]:
             if 'word' in word:
-                print word['word'] + "[" + word.get('reading',"") + "]"
+                print(word['word'] + "[" + word.get('reading',"") + "]")
             else:
-                print word['reading']
-    print "Definitions"
+                print(word['reading'])
+    print("Definitions")
     for idx,meaning in enumerate(response['senses']):
-        print str(idx+1) + ". ",
+        print(str(idx+1) + ". ")
         cobbler(meaning['english_definitions'])
-    print "=" * 80
-    print
+    print("=" * 80,end='\n')
 #pprint(data['data'])
