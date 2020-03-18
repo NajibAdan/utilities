@@ -4,6 +4,10 @@ import urllib.request
 import sys
 BASE_URL = "https://jisho.org/api/v1/search/words?keyword="
 
+def exit(whatToPrint):
+    print(whatToPrint)
+    sys.exit(0)
+    
 def cobbler(definitions):
     empty_list = []
     for defe in definitions:
@@ -11,15 +15,16 @@ def cobbler(definitions):
     print(', '.join(empty_list)) 
 
 if len(sys.argv) == 1:
-    print("Correct usage: jisho word_to_search")
-    sys.exit(0)
+    exit("Correct usage: jisho word_to_search")
 else:
-    resp = urllib.request.Request(BASE_URL+urllib.request.quote(sys.argv[1]))
-    data = json.load(urllib.request.urlopen(BASE_URL+urllib.request.quote(sys.argv[1])))
+    try:
+        response = urllib.request.urlopen(BASE_URL+urllib.request.quote(sys.argv[1]))
+    except urllib.error.URLError as e:
+        exit(str(e.__dict__['reason'])[11:])
 
+data = json.load(response)
 if not data['data']:
-    print('Nothing Found')
-    sys.exit(0)
+    exit('Nothing Found')
 for response in data['data']:
     test = response['japanese'][0]
     if 'word' in test:
@@ -38,4 +43,3 @@ for response in data['data']:
         print(str(idx+1) + ". ")
         cobbler(meaning['english_definitions'])
     print("=" * 80,end='\n')
-#pprint(data['data'])
