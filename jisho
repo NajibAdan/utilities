@@ -7,7 +7,7 @@ BASE_URL = "https://jisho.org/api/v1/search/words?keyword="
 def exit(whatToPrint):
     print(whatToPrint)
     sys.exit(0)
-    
+
 def cobbler(definitions):
     empty_list = []
     for defe in definitions:
@@ -40,6 +40,6 @@ for response in data['data']:
                 print(word['reading'])
     print("Definitions")
     for idx,meaning in enumerate(response['senses']):
-        print(str(idx+1) + ". ")
+        print(str(idx+1) + ". ",end='')
         cobbler(meaning['english_definitions'])
     print("=" * 80,end='\n')
